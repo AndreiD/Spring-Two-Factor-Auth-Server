@@ -1,0 +1,43 @@
+<thymeleaf xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+           th:fragment="navbar" th:remove="tag">
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Admin Panel</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin' ? 'active':''}"><a
+                            href="/admin">Overview</a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURI() == '/admin/post/new' ? 'active':''}"><a
+                            href="/admin/post/new">New Post</a></li>
+                    <li><a target="_blank" href="/">Public</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div th:if="${session[T(springtemplate.services
+          .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+        <ul class="alert" role="alert" id="messages" th:with="notifyMessages=${session[T(springtemplate.services
+          .NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+            <li th:each="msg : ${notifyMessages}" th:text="${msg.text}"
+                th:class="${#strings.toLowerCase(msg.type)}">
+            </li>
+            <span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(
+          T(springtemplate.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+        </ul>
+    </div>
+
+</thymeleaf>
+
+

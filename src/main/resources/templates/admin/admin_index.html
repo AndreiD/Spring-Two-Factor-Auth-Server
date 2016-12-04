@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
+
+<head>
+    <thymeleaf th:replace="/base_templates/admin/head :: head"/>
+</head>
+
+
+<body>
+<div class="container">
+    <thymeleaf th:replace="/base_templates/admin/navbar :: navbar"/>
+
+
+    <div class="jumbotron">
+
+        <h4>Blog Posts List</h4>
+
+        <div th:if="${not #lists.isEmpty(posts)}">
+            <table class="table table-responsive table-hover">
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="post: ${posts}">
+                    <td th:text="${post.id}"></td>
+                    <td th:href="${'/post/' + post.id}" th:text="${post.title}"></td>
+                    <td th:text="${#strings.abbreviate(post.content,10)}"></td>
+                    <td th:text="${#dates.format(post.publishedDate, 'dd MMMM yyyy')}"></td>
+                    <td><a th:href="${'/admin/post/edit/' + post.id}"
+                           class="btn btn-default">
+                        Edit </a>
+                    </td>
+                    <td><a th:href="${'/admin/post/delete/' + post.id}"
+                           class="btn btn-default">
+                        Delete </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <thymeleaf th:replace="/base_templates/admin/footer :: footer"/>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script language="JavaScript" type="text/javascript" src="/js/main.js"/>
+
+</body>
+</html>

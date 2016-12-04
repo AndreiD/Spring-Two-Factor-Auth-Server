@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
+
+<head>
+    <thymeleaf th:replace="/base_templates/public/head :: head"/>
+</head>
+
+
+<body>
+<div class="container">
+    <thymeleaf th:replace="/base_templates/public/navbar :: navbar"/>
+
+
+    <div style="margin-top: 50px;" th:if="${not #lists.isEmpty(posts)}">
+        <div id="card" th:each="post: ${posts}">
+
+            <h3 th:href="${'/post/' + post.id}" th:text="${post.title}"></h3>
+            <p id="subtitle" th:text="${#dates.format(post.publishedDate, 'dd MMMM yyyy')}"></p>
+            <br/>
+            <p th:text="${#strings.abbreviate(post.content,50)}"></p>
+
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <thymeleaf th:replace="/base_templates/public/footer :: footer"/>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script language="JavaScript" type="text/javascript" src="/js/main.js"/>
+</body>
+</html>

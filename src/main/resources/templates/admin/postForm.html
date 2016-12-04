@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
+
+<head>
+    <thymeleaf th:replace="/base_templates/admin/head :: head"/>
+</head>
+
+
+<body>
+<div class="container">
+    <thymeleaf th:replace="/base_templates/admin/navbar :: navbar"/>
+
+
+    <div class="jumbotron">
+
+        <form role="form" th:object="${post}" th:action="@{/admin/post}" method="post"  id="feedbackForm">
+
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="form-group">
+                <label for="name">Title</label>
+                <input class="form-control" type="text" id="name" th:field="*{title}"/>
+                <span class="help-block mdl-textfield__error" style="display: none;">Title ?</span>
+            </div>
+            <br/>
+
+            <div class="form-group">
+
+                <label  for="content">Content</label>
+                <textarea class="form-control" type="text" rows="30" id="content"
+                          th:field="*{content}"></textarea>
+                <span class="help-block mdl-textfield__error" style="display: none;">Content ?</span>
+            </div>
+            <br/>
+
+            <br/>
+
+            <button type="submit" id="feedbackSubmit"
+                    class="btn btn-primary btn-lg"
+                    style="display: block; margin-top: 10px;">POST
+            </button>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script language="JavaScript" type="text/javascript" src="/js/main.js"/>
+
+</body>
+</html>
