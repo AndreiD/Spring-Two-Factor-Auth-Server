@@ -12,6 +12,7 @@ public class Application {
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
+        //easier to click
         log.info("http://localhost:8080");
         log.info("http://localhost:8080/admin");
     }
